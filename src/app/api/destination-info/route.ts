@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const { destination, budget } = await req.json();
+  const { destination, startDate, endDate, budget } = await req.json();
 
+  // Placeholder for real live data integrations (Yelp, Booking, etc.)
   const mockData = {
     destination,
     budget,
@@ -18,7 +19,9 @@ export async function POST(req: Request) {
       { name: "City Walking Tour", avgPricePerPerson: 40 },
       { name: "Museum Pass", avgPricePerPerson: 25 },
       { name: "Boat Ride", avgPricePerPerson: 60 }
-    ]
+    ],
+    startDate,
+    endDate
   };
 
   const topThings = [
@@ -27,5 +30,8 @@ export async function POST(req: Request) {
     ...mockData.restaurants
   ].slice(0, 5);
 
-  return NextResponse.json({ ...mockData, topThings });
+  return NextResponse.json({
+    ...mockData,
+    topThings
+  });
 }
